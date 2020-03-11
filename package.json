@@ -1,0 +1,15 @@
+{
+  "name": "redux-no-redux",
+  "version": "1.0.0",
+  "description": "An implementation of Redux and React-redux using React Context and hooks",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "author": "Riccardo Coppola <ricca509@gmail.com>",
+  "license": "ISC"
+}
