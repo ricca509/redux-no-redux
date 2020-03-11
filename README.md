@@ -39,16 +39,63 @@ There is no `combineReducers` at the moment.
 
 ```
 import React from "react";
-import { reducer, initialState } from "./reducer";
-import { ContextProvider, useStore } from "./redux-no-redux";
+import ReactDOM from "react-dom";
+import { ContextProvider, useStore, connect } from "./redux-no-redux";
 
-function App() {
+const initialState = { count: 0 };
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREASE":
+      return { ...state, count: state.count + 1 };
+    case "DECREASE":
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+const increase = () => ({
+  type: "INCREASE"
+});
+
+const decrease = () => ({
+  type: "DECREASE"
+});
+
+const Counter = ({ count, onIncrease, onDecrease }) => {
+  return (
+    <div>
+      <span>{count}</span>
+      <button onClick={onIncrease}>+</button>
+      <button onClick={onDecrease}>-</button>
+    </div>
+  );
+};
+
+const mapStateToProps = state => ({
+  count: state.count
+});
+
+const mapDispatchToProps = dispatch => ({
+  onIncrease: () => dispatch(increase()),
+  onDecrease: () => dispatch(decrease())
+});
+
+const CounterHOC = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter);
+
+const App = () => {
   const store = useStore(reducer, initialState);
 
   return (
     <ContextProvider value={store}>
-      <Calendar />
+      <CounterHOC />
     </ContextProvider>
   );
-}
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
