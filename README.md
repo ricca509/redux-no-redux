@@ -19,13 +19,11 @@ function connect(mapStateToProps?, mapDispatchToProps?)
 
 The `connect` function takes only two parameters.
 
-### `mapStateToProps?: (state) => Object`
+### `mapStateToProps?: (state, ownProps) => Object`
 
-No `ownProps` are passed.
+### `mapDispatchToProps?: (dispatch, ownProps) => Object`
 
-### `mapDispatchToProps?: (dispatch) => Object`
-
-`mapDispatchToProps` has to be a function. No `ownProps` are passed.
+`mapDispatchToProps` has to be a function.
 
 ## `useStore()`
 

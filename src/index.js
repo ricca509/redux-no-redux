@@ -14,11 +14,11 @@ export const useStore = (reducer, initialState = {}) => {
 export const connect = (
   mapStateToProps = () => ({}),
   mapDispatchToProps = () => ({})
-) => Component => () => {
+) => Component => ownProps => {
   const { getState, dispatch } = useContext(Context);
-  const stateProps = mapStateToProps(getState());
-  const dispatchProps = mapDispatchToProps(dispatch);
-  const props = { ...stateProps, ...dispatchProps, dispatch };
+  const stateProps = mapStateToProps(getState(), ownProps);
+  const dispatchProps = mapDispatchToProps(dispatch, ownProps);
+  const props = { ...ownProps, ...stateProps, ...dispatchProps, dispatch };
 
   return createElement(Component, props, null);
 };
